@@ -1,8 +1,11 @@
+import '@scss/style';
+import '@js/connectImages';
+
 let currentCategory = "people"; // то что показывем по умолчанию как бы предзагурзка
 let currentPage = 1;
 const startUrl = "https://swapi.dev/api/";
 
-// мейн функция загрузка данных + страница
+// мейн функция загрузка данных + страница 
 function loadData() {
     const url = `${startUrl}${currentCategory}/?page=${currentPage}`;
 
@@ -52,37 +55,7 @@ window.addEventListener("click", (event) => {
 
 
 // тут тот самый html формируем на вывод модалки
-function getDetailsHTML(item) {
-    if (currentCategory === "people") {
-        return `
-            <p>Name: ${item.name}</p>
-            <p>Height: ${item.height} cm</p>
-            <p>Mass: ${item.mass} kg</p>
-            <p>Hair Color: ${item.hair_color}</p>
-            <p>Eye Color: ${item.eye_color}</p>
-            <p>Birth Year: ${item.birth_year}</p>
-            <p>Gender: ${item.gender}</p>
-        `;
-    } else if (currentCategory === "planets") {
-        return `
-            <p>Name: ${item.name}</p>
-            <p>Climate: ${item.climate}</p>
-            <p>Gravity: ${item.gravity}</p>
-            <p>Terrain: ${item.terrain}</p>
-            <p>Population: ${item.population}</p>
-        `;
-    } else if (currentCategory === "vehicles") {
-        return `
-            <p>Name: ${item.name}</p>
-            <p>Model: ${item.model}</p>
-            <p>Manufacturer: ${item.manufacturer}</p>
-            <p>Cost: ${item.cost_in_credits} credits</p>
-            <p>Length: ${item.length} meters</p>
-            <p>Crew: ${item.crew}</p>
-            <p>Passengers: ${item.passengers}</p>
-        `;
-    }
-}
+import { getDetailsHTML } from "@js/details";
 
 // обвовление кнопок, типо кнопки показываються если будут подгурдены ссылки next или prev
 function updatePagination(next, prev) {
@@ -90,7 +63,7 @@ function updatePagination(next, prev) {
     document.querySelector(".prev").style.display = prev ? "block" : "none";
 }
 
-// тут переключаем категории
+// тут переключаем категории1
 function changeCategory(category) {
     currentCategory = category;
     currentPage = 1;
@@ -118,27 +91,9 @@ document.querySelector(".prev").addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", loadData);
 
+import { forApp } from '@/js/connectImages';
 
-
-
-
-
-
-
-// document.querySelector(".btn-people").addEventListener("click", () => {
-//     currentCategory = "people";
-//     currentPage = 1;
-//     loadData();
-// });
-
-// document.querySelector(".btn-planets").addEventListener("click", () => {
-//     currentCategory = "planets";
-//     currentPage = 1;
-//     loadData();
-// });
-
-// document.querySelector(".btn-transport").addEventListener("click", () => {
-//     currentCategory = "vehicles";
-//     currentPage = 1;
-//     loadData();
-// });
+const footerElement = document.createElement("img");
+footerElement.src = forApp.footer;
+footerElement.style.width = "100%";
+document.body.appendChild(footerElement);
